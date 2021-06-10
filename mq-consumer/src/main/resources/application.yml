@@ -3,6 +3,6 @@ spring:
      name: rabbitmq-consumer
 #配置rabbitMq 服务器
     rabbitmq:
-        username: lianwei
-        password: Lianwei@1234cn
-        addresses: amqps://b-26a0a0a7-eaa6-4fec-b70c-85c6b249f137.mq.us-east-1.amazonaws.com:5671
+        username:
+        password:
+        addresses:

@@ -2,7 +2,7 @@
 
 由于业务需要，项目需要接入AWS的MQ中间件。综合考虑使用业界比较流行的RabbitMQ。本例讲演示springboot-amqp与RabbitMQ的集成。
 
-###基本概念
+### 基本概念
 RabbitMQ由以下几个核心模块组成：
 * Message
   > 消息由消息头和消息体组成。消息体是不透明的，而消息头则由一系列的可选属性组成，这些属性包括routing-key（路由键）、priority（相对于其他消息的优先权）、delivery-

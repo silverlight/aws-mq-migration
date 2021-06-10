@@ -1,0 +1,11 @@
+
+spring:
+    application:
+        name: rabbitmq-consumer2
+    #配置rabbitMq 服务器
+    rabbitmq:
+        username:
+        password:
+        addresses:
+server:
+    port: 8083

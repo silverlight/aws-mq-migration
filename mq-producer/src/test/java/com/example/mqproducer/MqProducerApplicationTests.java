@@ -35,6 +35,9 @@ class MqProducerApplicationTests {
 
     }
 
+    /**
+     * 测试是否广播到所有队列
+     */
     @Test
     public void testSendFanout(){
         MessageModel messageModel = new MessageModel();
@@ -47,6 +50,15 @@ class MqProducerApplicationTests {
          */
         amqpTemplate.convertAndSend(MqConfig.FANOUT_EXCHANGE_NAME,"",messageModel);
 
+    }
+
+    /**
+     * 启动两个消费者队列，发送两条消息测试是否公平消费
+     */
+    @Test
+    public void testFairConsume(){
+        rabbitTemplate.convertAndSend(MqConfig.TOPIC_EXCHANGE_NAME,"queue.everything.email","公平消费消息1");
+        rabbitTemplate.convertAndSend(MqConfig.TOPIC_EXCHANGE_NAME,"queue.everything.email","公平消费消息2");
     }
 
 }
