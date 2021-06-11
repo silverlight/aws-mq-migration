@@ -61,4 +61,12 @@ class MqProducerApplicationTests {
         rabbitTemplate.convertAndSend(MqConfig.TOPIC_EXCHANGE_NAME,"queue.everything.email","公平消费消息2");
     }
 
+    /**
+     * 启动两个消费者队列，发送两条消息测试是否公平消费
+     */
+    @Test
+    public void testAckConsume(){
+        rabbitTemplate.convertAndSend(MqConfig.DIRECT_EXCHANGE_NAME,"queue.ack","公平消费消息1");
+    }
+
 }

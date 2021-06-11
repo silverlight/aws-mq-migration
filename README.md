@@ -164,4 +164,62 @@ public class Producer {
   }
 }
 ```
+#### 手动ACK <br>
+有时候因为各种各样的原因，消费者在消费消息时可能发生异常、宕机等意外情况，这时候如果不设置手动ACK的话消息会直接从broker中被删除。
+为了防止这种情况，我们可以设置手动ACK，在消息被消费成功后手动删除队列中的消息。如果消费失败，则消息还会存在与broker中，从而转发给下一个消费者。
+* 编码
+
+```java
+@Slf4j
+@Component
+public class ConsumerWithAck {
+
+    @RabbitListener(queues = {MqConfig.QUEUE_FOR_ACK}, ackMode = "MANUAL")
+    public void receiveEmail(String msg, Message message, Channel channel) throws IOException {
+        log.info("consumer1 接收到队列：{}，信息：{},开始处理...",MqConfig.QUEUE_FOR_ACK,msg);
+        try {
+            //处理业务逻辑
+        } catch (Exception e) {
+            //进异常直接拒收消息，这样消息会被下一个消费者消费。否则将变为unacked
+            channel.basicReject(message.getMessageProperties().getDeliveryTag(),true);
+            log.error("Ack failed",e);
+        }
+
+        //成功后手动删除消息
+        channel.basicAck(message.getMessageProperties().getDeliveryTag(),false);
+    }
+
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

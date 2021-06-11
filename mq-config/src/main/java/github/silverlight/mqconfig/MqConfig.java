@@ -19,6 +19,7 @@ public class MqConfig {
 
     public static final String QUEUE_FOR_EMAIL = "queue_for_email";
     public static final String QUEUE_FOR_SMS = "queue_for_sms";
+    public static final String QUEUE_FOR_ACK = "queue_for_ack";
     public static final String QUEUE_FOR_MESSAGE_MODEL = "queue_for_message_model";
     public static final String QUEUE_FOR_FANOUT_A = "queue_for_fanout_A";
     public static final String QUEUE_FOR_FANOUT_B = "queue_for_fanout_B";
@@ -30,6 +31,8 @@ public class MqConfig {
     public static final String ROUTING_KEY_EMAIL = "queue.#.email.#";
     public static final String ROUTING_KEY_SMS = "queue.#.sms.#";
     public static final String ROUTING_KEY_MESSAGE_MODEL = "queue.message-model";
+    public static final String ROUTING_KEY_MESSAGE_ACK = "queue.ack";
+
 
     /**
      * 声明Topics工作模式的交换机
@@ -75,6 +78,14 @@ public class MqConfig {
     }
 
     /**
+     * 声明ack队列
+     */
+    @Bean(QUEUE_FOR_ACK)
+    public Queue ackQueue() {
+        return new Queue(QUEUE_FOR_ACK);
+    }
+
+    /**
      * 声明用于存放给定对象的队列
      */
     @Bean(QUEUE_FOR_MESSAGE_MODEL)
@@ -115,6 +126,12 @@ public class MqConfig {
     public Binding bindingMessageModelQueue(@Qualifier(QUEUE_FOR_MESSAGE_MODEL) Queue queue,
                                             @Qualifier(DIRECT_EXCHANGE_NAME) Exchange exchange) {
         return BindingBuilder.bind(queue).to(exchange).with(ROUTING_KEY_MESSAGE_MODEL).noargs();
+    }
+
+    @Bean
+    public Binding bindingMessageAckQueue(@Qualifier(QUEUE_FOR_ACK) Queue queue,
+                                            @Qualifier(DIRECT_EXCHANGE_NAME) Exchange exchange) {
+        return BindingBuilder.bind(queue).to(exchange).with(ROUTING_KEY_MESSAGE_ACK).noargs();
     }
 
     /**
