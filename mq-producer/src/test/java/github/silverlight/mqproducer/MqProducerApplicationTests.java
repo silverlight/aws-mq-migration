@@ -4,9 +4,13 @@ import github.silverlight.mqconfig.MessageModel;
 import github.silverlight.mqconfig.MqConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @SpringBootTest
 class MqProducerApplicationTests {
@@ -71,11 +75,16 @@ class MqProducerApplicationTests {
 
     @Test
     public void testConsistent(){
-        for(int i=0;i<10;i++){
-            MessageModel messageModel = new MessageModel();
-            messageModel.setMessage("consistent-content:"+i);
-            rabbitTemplate.convertAndSend(MqConfig.CONSISTENT_EXCHANGE_NAME,String.valueOf(i),messageModel);
+        for(int j=0;j<10;j++){
+            for(int i=0;i<10;i++){
+                MessageModel messageModel = new MessageModel();
+                messageModel.setMessage("consistent-content:"+j);
+                messageModel.setId(i+j+"");
+                messageModel.setHeader("hash-on", String.valueOf(j));
+                rabbitTemplate.convertAndSend(MqConfig.CONSISTENT_EXCHANGE_NAME,"",messageModel);
+            }
         }
+
     }
 
 }

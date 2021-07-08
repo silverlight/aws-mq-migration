@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 /**
  * @author Guang.Yang
@@ -66,7 +69,9 @@ public class MqConfig {
 
     @Bean(CONSISTENT_EXCHANGE_NAME)
     public CustomExchange consistentExchange() {
-        return new CustomExchange("consistent", "x-consistent-hash", true, false);
+        Map<String, Object> map = new HashMap<>();
+        map.put("hash-header","hash-on");
+        return new CustomExchange("consistent", "x-consistent-hash", true, false, map);
     }
 
 //    /**
@@ -197,12 +202,12 @@ public class MqConfig {
     @Bean
     public Binding bindingCons3(@Qualifier(CONSISTENT_3) Queue con3,
                                 @Qualifier(CONSISTENT_EXCHANGE_NAME) CustomExchange customExchange) {
-        return BindingBuilder.bind(con3).to(customExchange).with("1").noargs();
+        return BindingBuilder.bind(con3).to(customExchange).with("3").noargs();
     }
 
     @Bean
     public Binding bindingCons4(@Qualifier(CONSISTENT_4) Queue con4,
             @Qualifier(CONSISTENT_EXCHANGE_NAME) CustomExchange customExchange) {
-        return BindingBuilder.bind(con4).to(customExchange).with("2").noargs();
+        return BindingBuilder.bind(con4).to(customExchange).with("4").noargs();
     }
 }

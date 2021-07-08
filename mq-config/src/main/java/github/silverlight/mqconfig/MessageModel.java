@@ -1,6 +1,7 @@
 package github.silverlight.mqconfig;
 
 import lombok.Data;
+import org.springframework.amqp.core.MessageProperties;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -11,7 +12,7 @@ import java.util.Date;
  * @date 2021-06-09
  */
 @Data
-public class MessageModel implements Serializable {
+public class MessageModel extends MessageProperties implements Serializable {
 
     private String id;
     private String message;

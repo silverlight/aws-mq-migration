@@ -53,23 +53,23 @@ public class Consumer {
 //        log.info("接收到队列：{}，信息：{},Message:{}", MqConfig.QUEUE_FOR_FANOUT_B, msg, message);
 //    }
 
-    @RabbitListener(queues = {MqConfig.CONSISTENT_1})
-    public void receiveConsistent1(MessageModel msg, Message message, Channel channel) {
-        log.info("consumer-2 接收到队列：{}，信息：{},Message:{}", MqConfig.CONSISTENT_1, msg, message);
-    }
+//    @RabbitListener(queues = {MqConfig.CONSISTENT_1})
+//    public void receiveConsistent1(MessageModel msg, Message message, Channel channel) {
+//        log.info("consumer-2 接收到队列：{}，信息：{},Message:{}", MqConfig.CONSISTENT_1, msg, message);
+//    }
 
     @RabbitListener(queues = {MqConfig.CONSISTENT_2})
     public void receiveConsistent2(MessageModel msg, Message message, Channel channel) {
         log.info("接收到队列：{}，信息：{},Message:{}", MqConfig.CONSISTENT_2, msg, message);
     }
 
-    @RabbitListener(queues = {MqConfig.CONSISTENT_3})
-    public void receiveConsistent3(MessageModel msg, Message message, Channel channel) {
-        log.info("接收到队列：{}，信息：{},Message:{}", MqConfig.CONSISTENT_3, msg, message);
-    }
-
-    @RabbitListener(queues = {MqConfig.CONSISTENT_4})
-    public void receiveConsistent4(MessageModel msg, Message message, Channel channel) {
-        log.info("接收到队列：{}，信息：{},Message:{}", MqConfig.CONSISTENT_4, msg, message);
-    }
+//    @RabbitListener(queues = {MqConfig.CONSISTENT_3})
+//    public void receiveConsistent3(MessageModel msg, Message message, Channel channel) {
+//        log.info("接收到队列：{}，信息：{},Message:{}", MqConfig.CONSISTENT_3, msg, message);
+//    }
+//
+//    @RabbitListener(queues = {MqConfig.CONSISTENT_4})
+//    public void receiveConsistent4(MessageModel msg, Message message, Channel channel) {
+//        log.info("接收到队列：{}，信息：{},Message:{}", MqConfig.CONSISTENT_4, msg, message);
+//    }
 }
