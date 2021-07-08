@@ -1,0 +1,11 @@
+
+spring:
+  application:
+    name: rabbitmq-consumer2
+  #配置rabbitMq 服务器
+  rabbitmq:
+    username: admin
+    password: MDeFY8g4oRbNaU_@
+    addresses: amqps://b-4e0cf787-f48d-4b5a-9c6e-db9d7dc6c564.mq.us-east-1.amazonaws.com:5671
+server:
+  port: 8084

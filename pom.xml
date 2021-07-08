@@ -20,6 +20,7 @@
     <modules>
         <module>mq-consumer</module>
         <module>mq-consumer-2</module>
+        <module>mq-consumer-3</module>
         <module>mq-producer</module>
         <module>mq-config</module>
     </modules>
